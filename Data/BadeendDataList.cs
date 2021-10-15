@@ -19,15 +19,15 @@ namespace Bad_eend
             throw new NotImplementedException();
         }
 
-        public void AddPost(Posts post)
-        {
-            postlist.Add(post);
-        }
         public void UpdatePost(int id, Posts post)
         {
             throw new NotImplementedException();
         }
         public Posts GetPost(int post_id)
+        {
+            throw new NotImplementedException();
+        }
+        public void DeletePost(int post_id)
         {
             throw new NotImplementedException();
         }
@@ -48,6 +48,14 @@ namespace Bad_eend
             userlist.Add(user);
         }
 
-        
+        public void UpdateLastPosted(int user_id, DateTime d)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddPost(Posts post)
+        {
+            postlist.Add(post);
+        }
     }
 }

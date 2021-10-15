@@ -28,13 +28,18 @@ namespace Bad_eend
             return Ok(_data.GetUser(user_id));
         }
 
-
-
         [HttpPost]
         public ActionResult<Users> Post([FromBody] Users user)
         {
             _data.AddUser(user);
             return Ok("Gg well played");
+        }
+
+        [HttpPut("{user_id}/UpdateLastPosted")]
+        public ActionResult<Users> Update(int user_id)
+        {
+            _data.UpdateLastPosted(user_id, DateTime.Now);
+            return Ok("Record updated");
         }
     }
 }

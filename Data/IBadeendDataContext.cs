@@ -19,6 +19,7 @@ namespace Bad_eend
         IEnumerable<Users> GetUsers();
         Users GetUser(int user_id);
         void AddUser(Users user);
-        
+        void UpdateLastPosted(int user_id, DateTime d);
+        void DeletePost(int post_id);
     }
 }

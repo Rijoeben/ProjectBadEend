@@ -15,6 +15,7 @@ namespace Bad_eend
         public string Phonenumber { get; set; }
         public string Email { get; set; }
         public bool verified { get; set; }
+        public DateTime Last_Posted { get; set; }
 
     }
 }

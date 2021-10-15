@@ -56,5 +56,12 @@ namespace Bad_eend
             _data.UpdatePost(id, post);
             return Ok("Record updated");
         }
+
+        [HttpDelete]
+        public ActionResult<Posts> Delete(int post_id)
+        {
+            _data.DeletePost(post_id);
+            return Ok("Record deleted");
+        }
     }
 }
