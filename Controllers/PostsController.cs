@@ -39,7 +39,6 @@ namespace Bad_eend
 
 
 
-
         [HttpPost]
         public ActionResult<Posts> Post([FromBody] Posts post)
         {

@@ -52,5 +52,14 @@ namespace Bad_eend
         {
             database.GetCollection<Users>("Users").Insert(user);
         }
+        void IBadeendDataContext.DeleteUser(int user_id)
+        {
+            database.GetCollection<Users>("Users").Delete(user_id);
+        }
+
+        public Users DeleteUser(int user_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

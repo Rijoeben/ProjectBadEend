@@ -36,5 +36,13 @@ namespace Bad_eend
             _data.AddUser(user);
             return Ok("Gg well played");
         }
+
+        [HttpDelete]
+        public ActionResult<Users> Delete(int user_id)
+        {
+            _data.DeleteUser(user_id);
+            return Ok("user deleted");
+        }
+        
     }
 }

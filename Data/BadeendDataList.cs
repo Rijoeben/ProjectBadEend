@@ -48,6 +48,10 @@ namespace Bad_eend
             userlist.Add(user);
         }
 
+        public void DeleteUser(int user_id)
+        {
+            throw new NotImplementedException();
+        }
         
     }
 }
