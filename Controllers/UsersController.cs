@@ -41,5 +41,11 @@ namespace Bad_eend
             _data.UpdateLastPosted(user_id, DateTime.Now);
             return Ok("Record updated");
         }
+        [HttpDelete]
+        public ActionResult<Users> DeleteUser(int user_id)
+        {
+            _data.DeleteUser(user_id);
+            return Ok("User deleted");
+        }
     }
 }
