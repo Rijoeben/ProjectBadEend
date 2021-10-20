@@ -13,8 +13,15 @@ namespace TestMongoDB.Services
 
         public FollowersService(IFollowersDatabaseSettings settings)
         {
-            MongoClient client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("FollowersDb");
+
+            MongoClientSettings setting = MongoClientSettings.FromConnectionString("mongodb+srv://Admin:<Opperbadeend>@socialconnections.bidnv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            MongoClient client = new MongoClient(setting);
+            var database = client.GetDatabase("test");
+
+
+            /*MongoClient client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("FollowersDb");*/
+
 
             _followers = database.GetCollection<Followers>("Followers");
         }
