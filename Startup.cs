@@ -35,7 +35,7 @@ namespace TestMongoDB
             services.AddSingleton<IFollowersDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<FollowersDatabaseSettings>>().Value);
 
-            services.AddSingleton<FollowersDatabase>();
+            services.AddSingleton<FollowersService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
