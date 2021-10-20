@@ -16,7 +16,7 @@ namespace TestMongoDB.Services
 
             MongoClientSettings setting = MongoClientSettings.FromConnectionString("mongodb+srv://Admin:<Opperbadeend>@socialconnections.bidnv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             MongoClient client = new MongoClient(setting);
-            var database = client.GetDatabase("test");
+            var database = client.GetDatabase("FollowersDb");
 
 
             /*MongoClient client = new MongoClient("mongodb://localhost:27017");
