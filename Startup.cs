@@ -1,3 +1,6 @@
+using Bad_eend.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,10 +30,24 @@ namespace Bad_eend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(typeof(IBadeendDataContext), typeof(BadeendDatabase));
+            services.AddSingleton(typeof(IBadeendCredentials), typeof(BadeendCredentialsDatabase));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bad_eend", Version = "v1" });
+            });
+            //adjust ConfigureServices-method
+            services.AddCors(s => s.AddPolicy("MyPolicy", builder => builder.AllowAnyOrigin()
+                                              .AllowAnyMethod()
+                                              .AllowAnyHeader()));
+            services
+              .AddAuthentication()
+              .AddScheme<AuthenticationSchemeOptions,
+                      BasicAuthenticationHandler>("BasicAuthenticationScheme", options => { });
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("BasicAuthentication",
+                        new AuthorizationPolicyBuilder("BasicAuthenticationScheme").RequireAuthenticatedUser().Build());
             });
         }
 
@@ -43,6 +60,8 @@ namespace Bad_eend
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bad_eend v1"));
             }
+
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 

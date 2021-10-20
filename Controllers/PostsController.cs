@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace Bad_eend
 
 
         [HttpPost]
+        [Authorize(Policy = "BasicAuthentication", Roles = "Root,Admin,User")]
         public ActionResult<Posts> Post([FromBody] Posts post)
         {
             _data.AddPost(post);
@@ -51,6 +53,7 @@ namespace Bad_eend
 
 
         [HttpPut]
+        [Authorize(Policy = "BasicAuthentication", Roles = "Root,Admin")]
         public ActionResult<Posts> Put(int id, [FromBody] Posts post)
         {
             _data.UpdatePost(id, post);

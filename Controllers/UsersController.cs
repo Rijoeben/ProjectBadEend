@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace Bad_eend
 
 
         [HttpPost]
+        [Authorize(Policy = "BasicAuthentication", Roles = "Root,Admin,User")]
         public ActionResult<Users> Post([FromBody] Users user)
         {
             _data.AddUser(user);
