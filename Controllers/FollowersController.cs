@@ -44,7 +44,7 @@ namespace TestMongoDB.Controllers
             return CreatedAtRoute("GetFollower", new { id = userId.ToString() });
         }
 
-        [HttpPut("{id:length(24)}")]
+        /*[HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, string follower)
         {
             var user = _followerService.Get(id);
@@ -57,7 +57,7 @@ namespace TestMongoDB.Controllers
             _followerService.Update(id, follower);
 
             return NoContent();
-        }
+        }*/
 
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
