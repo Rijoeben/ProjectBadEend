@@ -61,5 +61,10 @@ namespace Bad_eend
         {
             postlist.Add(post);
         }
+
+        public void DeleteUser(int user_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

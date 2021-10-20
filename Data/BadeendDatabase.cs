@@ -68,5 +68,10 @@ namespace Bad_eend
 
             database.GetCollection<Users>("Users").Update(u);
         }
+
+        public void DeleteUser(int user_id)
+        {
+            database.GetCollection<Users>("Users").Delete(user_id);
+        }
     }
 }
