@@ -52,8 +52,8 @@ namespace Bad_eend
 
             HashingHandler hasher = new HashingHandler();
      
-            /*
-            BadeendCredentialsDatabase db = new BadeendCredentialsDatabase(); // Dit kan niet want dan kan die in de main database class der ni aan
+            
+            BadeendCredentialsDatabase db = new BadeendCredentialsDatabase();
 
             List<string> creds = db.FindCredentials(authUsername);
             // creds[0] = password, creds[1] = salt,  creds[2] = role
@@ -76,67 +76,6 @@ namespace Bad_eend
                 }
                
             }
-            return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
-            */
-            
-            string rootData = @"{
-                'Username': 'root',
-                'Password': '08659fe5d318651296ee8eb351b8d34ca1720581026a28fe905c69ea13602b3a',
-                 'Salt': 'uTRr7isPV/O+dEOkk4XGfY3tzoQ/OlOEFYX1R9YIk04=',
-                 'Role': 'Root'
-                }";
-
-            var jsonRoot = JObject.Parse(rootData);
-            string adminData = @"{
-                'Username': 'admin',
-                'Password': '262927a38c69b057420387d7f2964a374f394c2ff0028d1e576b6128c6fae802',
-                 'Salt': 'wTW3SU0kr03Sw5aBqyghjCv0WVW8VU1uVszOj0/NM3I=',
-                 'Role': 'Admin'
-                }";
-
-            var jsonAdmin = JObject.Parse(adminData);
-            string userData = @"{
-                'Username': 'user',
-                'Password': '8211a1d5b3f4242978f5251085dbe0f732a42839332153abe3fa94b522588fff2',
-                 'Salt': 'xag7XHvw4ns/x0qLT7T1ZoPoHSOuYYpGesPXn7nZRGE=',
-                 'Role': 'User'
-                }";
-
-            var jsonUser = JObject.Parse(userData);
-
-            List<JObject> creds = new List<JObject>() { jsonRoot, jsonAdmin, jsonUser};
-
-            int index = -1;
-            switch (authUsername)
-            {
-                case "root":
-                    index = 0;
-                    break;
-                case "admin":
-                    index = 1;
-                    break;
-                case "user":
-                    index = 2;
-                    break;
-                default:
-                    break;
-            }
-
-            if (creds[index]["Password"].ToString() == hasher.Encrypt_Data(authPassword + creds[index]["Salt"].ToString()))
-                {
-                    List<Claim> claims = new List<Claim>();
-                    claims.Add(new Claim(ClaimTypes.Name, authUsername));
-
-                    if (creds[index]["Role"].ToString() == "Root") claims.Add(new Claim(ClaimTypes.Role, "Root"));
-                    if (creds[index]["Role"].ToString() == "Admin") claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-                    if (creds[index]["Role"].ToString() == "User") claims.Add(new Claim(ClaimTypes.Role, "User"));
-
-                    var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Custom"));
-
-                    return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(claimsPrincipal, Scheme.Name)));
-                }
-
-            
             return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
             
         }

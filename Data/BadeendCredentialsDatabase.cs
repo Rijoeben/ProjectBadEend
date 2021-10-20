@@ -11,7 +11,8 @@ namespace Bad_eend.Data
     public class BadeendCredentialsDatabase : IBadeendCredentials
     {
 
-        public LiteDatabase database = new LiteDatabase(@"credentials.db");
+        public LiteDatabase database = new LiteDatabase(@"Filename=credentials.db;connection=shared");
+        
 
         public void AddCredentials(Credentials creds)
         {

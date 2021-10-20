@@ -18,12 +18,15 @@ namespace Bad_eend
         {
             _data = data;
         }
+
         [HttpGet]
+        [Authorize(Policy = "BasicAuthentication", Roles = "Root,User")]
         public ActionResult<IEnumerable<Users>> Get()
         {
             return Ok(_data.GetUsers());
         }
         [HttpGet("{user_id}")]
+        [Authorize(Policy = "BasicAuthentication", Roles = "Root")]
         public ActionResult<IEnumerable<Users>> GetUser(int user_id)
         {
             return Ok(_data.GetUser(user_id));
