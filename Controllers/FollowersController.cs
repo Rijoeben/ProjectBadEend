@@ -20,8 +20,10 @@ namespace TestMongoDB.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Followers>> Get() =>
-            _followerService.Get();
+        public ActionResult<IEnumerable<Followers>> Get()
+        {
+            return Ok(_followerService.Get());
+        }
 
         [HttpGet("{id:length(24)}", Name = "GetFollower")]
         public ActionResult<Followers> Get(string id)
@@ -45,7 +47,7 @@ namespace TestMongoDB.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, string follower)
+        public IActionResult Update(string id, Followers follower)
         {
             var user = _followerService.Get(id);
 
@@ -60,9 +62,9 @@ namespace TestMongoDB.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(int id)
         {
-            var follower = _followerService.Get(id);
+            var follower = _followerService.Get(Convert.ToString(id));
 
             if (follower == null)
             {

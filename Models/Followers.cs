@@ -12,7 +12,9 @@ namespace TestMongoDB.Models
     {
         [BsonId]
         //[BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public int Id { get; set; }
+
+        public string UserName { get; set; }
 
         [BsonElement("Followers")]
         public List<string> list_followers { get; set; }
