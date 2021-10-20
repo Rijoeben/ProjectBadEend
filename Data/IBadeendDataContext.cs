@@ -21,5 +21,6 @@ namespace Bad_eend
         void AddUser(Users user);
         void UpdateLastPosted(int user_id, DateTime d);
         void DeletePost(int post_id);
+        void DeleteUser(int id);
     }
 }

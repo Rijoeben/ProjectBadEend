@@ -27,9 +27,7 @@ namespace Bad_eend
         void IBadeendDataContext.AddPost(Posts post)
         {
             Users u = database.GetCollection<Users>("Users").FindById(post.User_Id);
-            if (u.Last_Posted == null) database.GetCollection<Posts>("Posts").Insert(post);
             if (u.Last_Posted.AddDays(1) < DateTime.Now) database.GetCollection<Posts>("Posts").Insert(post);
-            else return; 
         }
 
         void IBadeendDataContext.UpdatePost(int id, Posts post)
@@ -58,6 +56,10 @@ namespace Bad_eend
         void IBadeendDataContext.AddUser(Users user)
         {
             database.GetCollection<Users>("Users").Insert(user);
+        }
+        void IBadeendDataContext.DeleteUser(int id)
+        {
+            database.GetCollection<Users>("Users").Delete(id);
         }
         void IBadeendDataContext.UpdateLastPosted(int user_id, DateTime d)
         {
