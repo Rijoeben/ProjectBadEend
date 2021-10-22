@@ -40,6 +40,13 @@ namespace TestMongoDB.Services
             _followers.InsertOne(user);
         }
 
+        internal void Update(string id, string follower)
+        {
+            Followers flw = _followers.Find<Followers>(followers => followers.Id == id).FirstOrDefault();
+            flw.list_followers.Add(follower);
+            _followers.ReplaceOne(followers => followers.Id == id, flw);
+        }
+
         /*public void Update(string id, string follower) =>
             _followers.InsertOne(follower);*/
 

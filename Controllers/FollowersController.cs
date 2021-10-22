@@ -23,17 +23,17 @@ namespace TestMongoDB.Controllers
         public ActionResult<List<Followers>> Get() =>
             _followerService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetFollower")]
+        [HttpGet("{id}")]
         public ActionResult<Followers> Get(string id)
         {
-            var book = _followerService.Get(id);
+            Followers follower = _followerService.Get(id);
 
-            if (book == null)
+            if (follower == null)
             {
                 return NotFound();
             }
 
-            return book;
+            return follower;
         }
 
         [HttpPost]
@@ -41,25 +41,25 @@ namespace TestMongoDB.Controllers
         {
             _followerService.Create(userId);
 
-            return CreatedAtRoute("GetFollower", new { id = userId.ToString() });
+            return Ok("User created");
         }
 
-        /*[HttpPut("{id:length(24)}")]
+        [HttpPut("{id}")]
         public IActionResult Update(string id, string follower)
         {
-            var user = _followerService.Get(id);
+            Followers user = _followerService.Get(id);
             if (user == null)
             {
                 return NotFound();
             }
             _followerService.Update(id, follower);
-            return NoContent();
-        }*/
+            return Ok($"Follower added to user {id}");
+        }
 
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            var follower = _followerService.Get(id);
+            Followers follower = _followerService.Get(id);
 
             if (follower == null)
             {
@@ -68,7 +68,7 @@ namespace TestMongoDB.Controllers
 
             _followerService.Remove(follower.Id);
 
-            return NoContent();
+            return Ok("User removed");
         }
     }
 }
