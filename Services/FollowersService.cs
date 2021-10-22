@@ -14,7 +14,7 @@ namespace TestMongoDB.Services
         public FollowersService(IFollowersDatabaseSettings settings)
         {
 
-            MongoClientSettings setting = MongoClientSettings.FromConnectionString("mongodb+srv://Admin:<Opperbadeend>@socialconnections.bidnv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            MongoClientSettings setting = MongoClientSettings.FromConnectionString("mongodb+srv://Admin:Opperbadeend@socialconnections.bidnv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             MongoClient client = new MongoClient(setting);
             var database = client.GetDatabase("FollowersDb");
 
@@ -40,8 +40,8 @@ namespace TestMongoDB.Services
             _followers.InsertOne(user);
         }
 
-        public void Update(string id, string follower) =>
-            _followers.InsertOne(follower);
+        /*public void Update(string id, string follower) =>
+            _followers.InsertOne(follower);*/
 
         public void Remove(Followers followersIn) =>
             _followers.DeleteOne(followers => followers.Id == followersIn.Id);
