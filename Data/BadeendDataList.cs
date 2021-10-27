@@ -47,10 +47,7 @@ namespace Bad_eend
         {
             userlist.Add(user);
         }
-        public void DeleteUser(int id)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public void UpdateLastPosted(int user_id, DateTime d)
         {
