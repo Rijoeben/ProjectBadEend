@@ -1,4 +1,6 @@
 using Bad_eend.Data;
+using Bad_eend.Models;
+using Bad_eend.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -29,6 +32,16 @@ namespace Bad_eend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<FollowersDatabaseSettings>(
+            Configuration.GetSection(nameof(FollowersDatabaseSettings)));
+
+            services.AddSingleton<IFollowersDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<FollowersDatabaseSettings>>().Value);
+
+            services.AddSingleton<FollowersService>();
+
+
             services.AddSingleton(typeof(IBadeendDataContext), typeof(BadeendDatabase));
             services.AddSingleton(typeof(IBadeendCredentials), typeof(BadeendCredentialsDatabase));
             services.AddControllers();
@@ -49,6 +62,8 @@ namespace Bad_eend
                 options.AddPolicy("BasicAuthentication",
                         new AuthorizationPolicyBuilder("BasicAuthenticationScheme").RequireAuthenticatedUser().Build());
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
