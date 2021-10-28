@@ -43,8 +43,15 @@ namespace Bad_eend
         [HttpPost]
         public ActionResult<Posts> Post([FromBody] Posts post)
         {
-            _data.AddPost(post);
-            return Ok("Record added");
+            try
+            {
+                _data.AddPost(post);
+                return Ok("Record added");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Already posted today");
+            }
         }
 
 
@@ -55,6 +62,13 @@ namespace Bad_eend
         {
             _data.UpdatePost(id, post);
             return Ok("Record updated");
+        }
+
+        [HttpDelete]
+        public ActionResult<Posts> Delete(int post_id)
+        {
+            _data.DeletePost(post_id);
+            return Ok("Record deleted");
         }
     }
 }

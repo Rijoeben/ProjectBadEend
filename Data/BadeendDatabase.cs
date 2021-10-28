@@ -26,7 +26,8 @@ namespace Bad_eend
 
         void IBadeendDataContext.AddPost(Posts post)
         {
-            database.GetCollection<Posts>("Posts").Insert(post);
+            Users u = database.GetCollection<Users>("Users").FindById(post.User_Id);
+            if (u.Last_Posted.AddDays(1) < DateTime.Now) database.GetCollection<Posts>("Posts").Insert(post);
         }
 
         void IBadeendDataContext.UpdatePost(int id, Posts post)
@@ -37,6 +38,10 @@ namespace Bad_eend
             entity.Likes = post.Likes;
 
             database.GetCollection<Posts>("Posts").Update(entity);
+        }
+        void IBadeendDataContext.DeletePost(int post_id) 
+        {
+            database.GetCollection<Posts>("Posts").Delete(post_id);
         }
 
 
@@ -51,6 +56,22 @@ namespace Bad_eend
         void IBadeendDataContext.AddUser(Users user)
         {
             database.GetCollection<Users>("Users").Insert(user);
+        }
+        void IBadeendDataContext.DeleteUser(int id)
+        {
+            database.GetCollection<Users>("Users").Delete(id);
+        }
+        void IBadeendDataContext.UpdateLastPosted(int user_id, DateTime d)
+        {
+            Users u = database.GetCollection<Users>("Users").FindById(user_id);
+            u.Last_Posted = d;
+
+            database.GetCollection<Users>("Users").Update(u);
+        }
+
+        public void DeleteUser(int user_id)
+        {
+            database.GetCollection<Users>("Users").Delete(user_id);
         }
     }
 }

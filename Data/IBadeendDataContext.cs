@@ -14,11 +14,14 @@ namespace Bad_eend
 
         void AddPost(Posts post);
         void UpdatePost(int id, Posts post);
+        void UpdateLastPosted(int user_id, DateTime d);
+        void DeletePost(int post_id);
 
         // User methods
         IEnumerable<Users> GetUsers();
         Users GetUser(int user_id);
         void AddUser(Users user);
-        
+
+        void DeleteUser(int user_id);
     }
 }
