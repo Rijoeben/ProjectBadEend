@@ -40,16 +40,16 @@ namespace Bad_eend
         [Authorize(Policy = "BasicAuthentication", Roles = "Root,Admin,User")]
         public ActionResult<Posts> Post([FromBody] Posts post)
         {
-            try
-            {
+            //try
+            //{
                 _data.AddPost(post);
                 return Ok("Record added");
-            }
-            catch (Exception e)
-            {
-                var test = e.InnerException;
-                return BadRequest(test);
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    var test = e.InnerException;
+            //    return BadRequest(test);
+            //}
         }
 
 
