@@ -47,7 +47,8 @@ namespace Bad_eend
             }
             catch (Exception e)
             {
-                return BadRequest("Already posted today");
+                var test = e.InnerException;
+                return BadRequest(test);
             }
         }
 
