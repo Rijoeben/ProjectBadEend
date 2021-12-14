@@ -21,7 +21,6 @@ namespace Bad_eend
         IEnumerable<Users> GetUsers();
         Users GetUser(int user_id);
         void AddUser(Users user);
-
         void DeleteUser(int user_id);
     }
 }
